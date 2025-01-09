@@ -1,0 +1,13 @@
+# path: sudo nano /usr/lib/systemd/system/afis-service.service  /etc/systemd/system/afis-service.service
+# restart: sudo systemctl restart afis-service
+[Unit]
+Description=Afis Service 
+After=network.target remote-fs.target nss-lookup.target nginx.target
+[Service]
+ExecStart=/usr/bin/java -Xms3g -Xmx4g -server -jar /home/<app:user>/LangRegDeployments/jar/afis-service.jar
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=AfisService
+User=app
+[Install]
+WantedBy=multi-user.target

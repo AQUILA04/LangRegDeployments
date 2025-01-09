@@ -1,0 +1,13 @@
+# path: sudo nano /usr/lib/systemd/system/lang-reg.service  /etc/systemd/system/lang-reg.service
+# restart: sudo systemctl restart lang-reg
+[Unit]
+Description=LangReg Service API
+After=network.target remote-fs.target nss-lookup.target nginx.target
+[Service]
+ExecStart=/usr/bin/java -Xms3g -Xmx4g -server  -jar /home/<app:user>/LangRegDeployments/jar/optimize-lang-reg.jar
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=LangReg
+User=app
+[Install]
+WantedBy=multi-user.target

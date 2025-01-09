@@ -1,0 +1,13 @@
+# path: sudo nano /usr/lib/systemd/system/afis-master.service  /etc/systemd/system/afis-master.service
+# restart: sudo systemctl restart afis-master
+[Unit]
+Description=Afis Master 
+After=network.target remote-fs.target nss-lookup.target nginx.target
+[Service]
+ExecStart=/usr/bin/java -Xms3g -Xmx4g -server -jar /home/<app:user>/LangRegDeployments/jar/afis-master.jar
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=AfisMaster
+User=app
+[Install]
+WantedBy=multi-user.target
